@@ -20,3 +20,4 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('/students', 'StudentsController@index');
+$router->post('/students', 'StudentsController@store');
