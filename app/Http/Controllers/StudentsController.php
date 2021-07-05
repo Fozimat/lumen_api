@@ -89,4 +89,47 @@ class StudentsController extends Controller
             );
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'major' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Please fill all fields',
+                    'data' => $validator->errors()
+                ],
+                401
+            );
+        } else {
+            $student = Students::where('id', $id)->update([
+                'name' => $request->input('name'),
+                'major' => $request->input('major')
+            ]);
+
+            if ($student) {
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Student updated successfully',
+                        'data' => $student
+                    ],
+                    201
+                );
+            } else {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Student not updated'
+                    ],
+                    400
+                );
+            }
+        }
+    }
 }

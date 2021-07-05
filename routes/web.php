@@ -22,3 +22,4 @@ $router->get('/', function () use ($router) {
 $router->get('/students', 'StudentsController@index');
 $router->post('/students', 'StudentsController@store');
 $router->get('/students/{id}', 'StudentsController@show');
+$router->put('/students/{id}', 'StudentsController@update');
