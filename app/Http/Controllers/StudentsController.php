@@ -159,11 +159,11 @@ class StudentsController extends Controller
             $search = $request->q;
 
             $students = Students::where('name', 'LIKE', '%' . $search . '%')->get();
-
-            if (count($students) > 0) {
+            $count = count($students);
+            if ($count > 0) {
                 $data = [
                     'success' => true,
-                    'message' => 'Student data found',
+                    'message' => $count . ' Student found',
                     'data' => $students
                 ];
                 return response()->json($data, 200);
