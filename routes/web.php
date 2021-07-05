@@ -24,3 +24,4 @@ $router->post('/students', 'StudentsController@store');
 $router->get('/students/{id}', 'StudentsController@show');
 $router->put('/students/{id}', 'StudentsController@update');
 $router->delete('/students/{id}', 'StudentsController@destroy');
+$router->get('/students/search', 'StudentsController@search');

@@ -152,4 +152,28 @@ class StudentsController extends Controller
             return response()->json($data, 404);
         }
     }
+
+    public function search(Request $request)
+    {
+        if ($request->has('q')) {
+            $search = $request->q;
+
+            $students = Students::where('name', 'LIKE', '%' . $search . '%')->get();
+
+            if (count($students) > 0) {
+                $data = [
+                    'success' => true,
+                    'message' => 'Student data found',
+                    'data' => $students
+                ];
+                return response()->json($data, 200);
+            } else {
+                $data = [
+                    'success' => false,
+                    'message' => 'Student data not found'
+                ];
+                return response()->json($data, 404);
+            }
+        }
+    }
 }
